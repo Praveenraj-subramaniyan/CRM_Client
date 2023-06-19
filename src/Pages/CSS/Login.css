@@ -1,0 +1,31 @@
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.registerbtn{
+    text-align: center;
+    text-decoration: none;
+}
+.visually-hidden {
+  visibility: hidden;
+}
+.visually-true {
+  visibility: visible;
+  color: red;
+}
