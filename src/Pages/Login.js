@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import "./CSS/Login.css";
 import Cookies from "js-cookie";
+import { LoginAPI } from "../Api/api";
 
 function Login() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
     emailid: "",
     password: "",
@@ -15,39 +16,27 @@ function Login() {
     message: "null",
   });
   function HandleResponse(response) {
-    if (response === "True") {
+    setIsLoading(false);
+    if (response === true) {
       const expiryDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
       Cookies.set("crm_login", JSON.stringify(data), {
         expires: expiryDate,
         sameSite: "None",
         secure: true,
       });
-      navigate("/home")
-      console.log(response);
-    } else if (response === "Invalid") {
+      navigate("/home");
+    } else {
       setIsVisible({
         status: "visually-true",
         message: "Invalid username and password",
       });
-    } else if (response === "False") {
-      setIsVisible({
-        status: "visually-true",
-        message: "Invalid password",
-      });
     }
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    const url = "http://localhost:3000/login";
-    axios
-      .post(url, data)
-      .then((res) => {
-        HandleResponse(res.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    setIsLoading(true);
+    HandleResponse(await LoginAPI(data));
   }
 
   function handleData(event) {
@@ -85,7 +74,7 @@ function Login() {
           {isVisible.message}
         </label>
         <Link to="/forgetpassword" className="link">
-            Forgot password?
+          Forgot password?
         </Link>
         <button
           type="submit"
@@ -98,6 +87,11 @@ function Login() {
             Create new account
         </Link> */}
       </form>
+      {isLoading && (
+        <div className="isLoadingLogin">
+          <div className="spinner-border  text-primary"></div>
+        </div>
+      )}
     </div>
   );
 }

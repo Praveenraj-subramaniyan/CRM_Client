@@ -29,3 +29,12 @@ input {
   visibility: visible;
   color: red;
 }
+.isLoadingLogin {
+  position: fixed;
+  padding-top: 20%;
+  padding-left: 45%;
+  padding-bottom: 40%;
+  padding-right: 55%;
+  background-color: transparent;
+  top: 0;
+}

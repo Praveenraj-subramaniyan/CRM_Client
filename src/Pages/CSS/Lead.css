@@ -1,0 +1,22 @@
+.CreateLeadbtn {
+  float: right;
+}
+@media (max-width: 600px) {
+  .isLoadingLead {
+    margin-top: 70%;
+    margin-left: 45%;
+  }
+}
+@media (min-width: 600px) and (max-width: 850px) {
+  .isLoadingLead {
+    margin-top: 40%;
+    margin-left: 45%;
+  }
+}
+.isLoadingLead {
+  padding-top: 20%;
+  padding-left: 45%;
+  padding-bottom: 40%;
+  padding-right: 55%;
+  background-color: white;
+}

@@ -1,0 +1,25 @@
+@media (max-width: 600px) {
+    .isLoadingHome {
+      margin-top: 70%;
+      margin-left: 45%;
+    }
+  }
+  @media (min-width: 600px) and (max-width: 850px) {
+    .isLoadingHome {
+      margin-top: 40%;
+      margin-left: 45%;
+    }
+  }
+  .isLoadingHome {
+    position: fixed;
+    padding-top: 20%;
+    padding-left: 45%;
+    padding-bottom: 40%;
+    padding-right: 55%;
+    background-color: white;
+    top: 0;
+  }
+  .dashBoardComp {
+    border: 1px solid whitesmoke;
+  }
+  
