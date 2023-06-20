@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./CSS/ForgetPassword.css";
 import lock from "../images/lock.PNG";
-// import { ForgetPasswordApi } from "../Api/api";
+import { ForgetPasswordApi } from "../Api/api";
 import { useNavigate } from "react-router-dom";
 
 function ForgetPassword() {
@@ -13,15 +13,15 @@ function ForgetPassword() {
   });
   async function HandleSubmit(event) {
     event.preventDefault();
-    // //   const response = await ForgetPasswordApi(email);
-    //   if (response === true) {
-    //     navigate("/newpassword");
-    //   } else {
-    //     setisVisible((prevState) => ({
-    //       ...prevState,
-    //       status: true,
-    //     }));
-    //   }
+       const response = await ForgetPasswordApi(email);
+      if (response === true) {
+        navigate("/newpassword");
+      } else {
+        setisVisible((prevState) => ({
+          ...prevState,
+          status: true,
+        }));
+      }
   }
 
   function HandleOnChange(event) {
@@ -39,13 +39,13 @@ function ForgetPassword() {
           <b>Trouble with logging in?</b>
         </p>
         <p className="text-secondary">
-          Enter your email address, phone number or <br /> username, and we'll
+          Enter your email address <br />and we'll
           send you a link to get back <br /> into your account.
         </p>
         <form
           action=""
           onSubmit={HandleSubmit}
-          className="ms-2 d-flex justify-content-center align-items-center fotgetpassform"
+          className="ms-2 d-flex justify-content-center align-items-center fotgetpassform loginFormcls"
         >
           <input
             type="email"

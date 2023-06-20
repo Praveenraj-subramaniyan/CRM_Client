@@ -45,7 +45,7 @@ function Services() {
       }
     };
     fetchData();
-  }, []);
+  }, [navigate]);
 
   function createServices(event) {
     event.preventDefault();
@@ -105,7 +105,12 @@ function Services() {
   function handleStatusChange(id, status) {
     setItemList((prevFilteritemList) =>
       prevFilteritemList.map((data) => {
-        if (data._id === id) {
+        if (data._id === id && data.status !== status) {
+          const value = StatusServicesAPI(id, status);
+          if (value === "login") {
+            alert("Session Expired");
+            navigate("/");
+          }
           return {
             ...data,
             status: status,
@@ -115,11 +120,7 @@ function Services() {
         }
       })
     );
-    const data = StatusServicesAPI(id, status);
-    if (data === "login") {
-      alert("Session Expired");
-      navigate("/");
-    }
+   
   }
   if (isLoading) {
     return (
@@ -261,7 +262,10 @@ function Services() {
                               <button
                                 className="dropdown-item"
                                 onClick={() =>
-                                  handleStatusChange(data._id, "QuaConfirmedlified")
+                                  handleStatusChange(
+                                    data._id,
+                                    "QuaConfirmedlified"
+                                  )
                                 }
                               >
                                 Confirmed
@@ -303,13 +307,14 @@ function Services() {
                       <p className="card-text">
                         <b>{data.title}</b>
                       </p>
-                      <p className="card-text">
-                        {data.description}
-                      </p>
+                      <p className="card-text">{data.description}</p>
                       <p className="card-text">
                         {data.name},{data.email},{data.phone}
                       </p>
-                      <div className="offcanvas offcanvas-start" id="editService">
+                      <div
+                        className="offcanvas offcanvas-start"
+                        id="editService"
+                      >
                         <div className="offcanvas-header">
                           <h1 className="offcanvas-title">Edit service</h1>
                           <button

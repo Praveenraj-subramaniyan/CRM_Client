@@ -1,11 +1,11 @@
 import "./App.css";
 import Login from "./Pages/Login";
-import ForgetPassword from "./Pages/ForgetPassword";
 import Home from "./Pages/Home";
 import Lead from "./Pages/Lead";
 import Services from "./Pages/Services";
 import AddUser from "./Pages/AddUser";
-import Contacts from "./Pages/Contacts";
+import ForgetPassword from "./Pages/ForgetPassword";
+import NewPassword  from"./Pages/NewPassword";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -14,12 +14,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/home" element={<Home />} />
           <Route path="/lead" element={<Lead />} />
           <Route path="/services" element={<Services />} />
           <Route path="/adduser" element={<AddUser />} />
-          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/resetPassword" element={<ForgetPassword />} />
+          <Route path="/newPassword" element={<NewPassword />} />
+          
         </Routes>
       </BrowserRouter>
     </div>

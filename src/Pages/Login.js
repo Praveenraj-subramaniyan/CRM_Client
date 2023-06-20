@@ -73,8 +73,8 @@ function Login() {
         <label htmlFor="emailid" className={isVisible.status}>
           {isVisible.message}
         </label>
-        <Link to="/forgetpassword" className="link">
-          Forgot password?
+        <Link to="/resetPassword" className="link">
+          Reset password?
         </Link>
         <button
           type="submit"

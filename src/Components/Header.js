@@ -41,16 +41,6 @@ function Header(data) {
             </li>
             <li className="nav-item">
               <Link
-                to={`/contacts`}
-                className={`${
-                  data.active === "Contacts" ? "active" : ""
-                } nav-link`}
-              >
-                Contacts
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
                 to={`/adduser`}
                 className={`${
                   data.active === "Adduser" ? "active" : ""

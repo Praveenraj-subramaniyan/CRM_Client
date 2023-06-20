@@ -3,7 +3,7 @@ label {
   display: block;
   margin-bottom: 5px;
 }
-form {
+.loginFormcls {
   display: flex;
   flex-direction: column;
   width: 400px;

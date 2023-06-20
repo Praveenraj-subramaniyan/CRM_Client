@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./CSS/Lead.css";
 import { useNavigate } from "react-router-dom";
-import { LeadAPI, CreateLeadAPI,EditLeadAPI ,StatusLeadAPI} from "../Api/api";
+import { LeadAPI, CreateLeadAPI, EditLeadAPI, StatusLeadAPI } from "../Api/api";
 import Header from "../Components/Header";
 
 function Lead() {
@@ -14,7 +14,7 @@ function Lead() {
     phone: "",
   });
   const [edit, setedit] = useState({
-    id:"",
+    id: "",
     company: "",
     name: "",
     email: "",
@@ -37,9 +37,8 @@ function Lead() {
       }
     };
     fetchData();
-  }, []);
+  }, [navigate]);
 
-  
   function createLead(event) {
     event.preventDefault();
     const data = CreateLeadAPI(create);
@@ -67,21 +66,21 @@ function Lead() {
       [name]: value,
     }));
   }
-  function SetEditLead(id){
-    itemList.map((data) =>{
-      if(data._id === id){
+  function SetEditLead(id) {
+    itemList.map((data) => {
+      if (data._id === id) {
         setedit({
-          id:id,
+          id: id,
           company: data.company,
           name: data.name,
           email: data.email,
           phone: data.phone,
-        })
+        });
       }
-    })
+    });
   }
 
-  function EditLead(event){
+  function EditLead(event) {
     event.preventDefault();
     const data = EditLeadAPI(edit);
     if (data === "login") {
@@ -95,22 +94,23 @@ function Lead() {
 
   function handleStatusChange(id, status) {
     setItemList((prevFilteritemList) =>
-    prevFilteritemList.map((data) => {
-      if (data._id === id) {
-        return {
-          ...data,
-          status: status,
-        };
-      } else {
-        return data;
-      }
-    })
-  );
-  const data =  StatusLeadAPI(id, status);
-    if (data === "login") {
-      alert("Session Expired");
-      navigate("/");
-    } 
+      prevFilteritemList.map((data) => {
+        if (data._id === id && data.status !== status) {
+          const value = StatusLeadAPI(id, status);
+          if (value === "login") {
+            alert("Session Expired");
+            navigate("/");
+          }
+          return {
+            ...data,
+            status: status,
+          };
+        } else {
+          return data;
+        }
+      })
+    );
+  
   }
   if (isLoading) {
     return (
@@ -278,10 +278,7 @@ function Lead() {
                       <p className="card-text">
                         {data.name},{data.email},{data.phone}
                       </p>
-                      <div
-                        className="offcanvas offcanvas-start"
-                        id="editLead"
-                      >
+                      <div className="offcanvas offcanvas-start" id="editLead">
                         <div className="offcanvas-header">
                           <h1 className="offcanvas-title">Edit Lead</h1>
                           <button

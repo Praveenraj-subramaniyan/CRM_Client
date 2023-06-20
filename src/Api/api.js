@@ -37,11 +37,10 @@ export const LeadAPI = async () => {
 
 export const CreateLeadAPI = async (create) => {
   try {
-   const  payLoad={
+    const payLoad = {
       loginDataFromCookie,
-      create
-    }
-    console.log(payLoad)
+      create,
+    };
     const response = await axios.post(url + "leads/create", payLoad);
     return response.data;
   } catch (error) {
@@ -51,10 +50,10 @@ export const CreateLeadAPI = async (create) => {
 };
 
 export const EditLeadAPI = async (edit) => {
-  const  payLoad={
+  const payLoad = {
     loginDataFromCookie,
-    edit
-  }
+    edit,
+  };
   try {
     const response = await axios.post(url + "leads/edit", payLoad);
     return response.data;
@@ -64,13 +63,12 @@ export const EditLeadAPI = async (edit) => {
   }
 };
 
-export const StatusLeadAPI = async (id,status) => {
-  const  payLoad={
+export const StatusLeadAPI = async (id, status) => {
+  const payLoad = {
     loginDataFromCookie,
     id,
-    status
-  }
-  console.log(payLoad)
+    status,
+  };
   try {
     const response = await axios.post(url + "leads/status", payLoad);
     return response.data;
@@ -92,10 +90,10 @@ export const ServicesAPI = async () => {
 
 export const CreateServicesAPI = async (create) => {
   try {
-   const  payLoad={
+    const payLoad = {
       loginDataFromCookie,
-      create
-    }
+      create,
+    };
     const response = await axios.post(url + "Services/create", payLoad);
     return response.data;
   } catch (error) {
@@ -105,10 +103,10 @@ export const CreateServicesAPI = async (create) => {
 };
 
 export const EditServicesAPI = async (edit) => {
-  const  payLoad={
+  const payLoad = {
     loginDataFromCookie,
-    edit
-  }
+    edit,
+  };
   try {
     const response = await axios.post(url + "Services/edit", payLoad);
     return response.data;
@@ -118,12 +116,12 @@ export const EditServicesAPI = async (edit) => {
   }
 };
 
-export const StatusServicesAPI = async (id,status) => {
-  const  payLoad={
+export const StatusServicesAPI = async (id, status) => {
+  const payLoad = {
     loginDataFromCookie,
     id,
-    status
-  }
+    status,
+  };
   try {
     const response = await axios.post(url + "Services/status", payLoad);
     return response.data;
@@ -133,3 +131,41 @@ export const StatusServicesAPI = async (id,status) => {
   }
 };
 
+export const ForgetPasswordApi = async (email) => {
+  const expiryDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
+  Cookies.set("forget_email", JSON.stringify(email), {
+    expires: expiryDate,
+    sameSite: "None",
+    secure: true,
+  });
+  try {
+    const response = await axios.post(url + "password/forget", {email});
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return "login";
+  }
+};
+
+export const NewPasswordApi = async (otp, newPassword, confirmPassword) => {
+  try {
+    const cookieValue = Cookies.get("forget_email");
+    const email = cookieValue ? JSON.parse(cookieValue) : null;
+    if (email === null) {
+      return "login";
+    } else {
+      const PayLoad = {
+        email,
+        otp,
+        newPassword,
+        confirmPassword,
+      };
+      const response = await axios.post(url + "password/new", PayLoad);
+      const responseLoginData = response.data;
+      return responseLoginData;
+    }
+  } catch (error) {
+    console.error(error);
+    return "resetPassword";
+  }
+};
