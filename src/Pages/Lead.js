@@ -7,6 +7,9 @@ import Header from "../Components/Header";
 function Lead() {
   const navigate = useNavigate();
   const [itemList, setItemList] = useState([]);
+  const [isAdmin, setisAdmin] = useState([]);
+  const [isManager, setisManager] = useState([]);
+  const [isEditPermission, setisEditPermission] = useState([]);
   const [create, setcreate] = useState({
     company: "",
     name: "",
@@ -29,7 +32,10 @@ function Lead() {
           alert("Session Expired");
           navigate("/");
         } else {
-          setItemList(data);
+          setItemList(data.leads);
+          setisAdmin(data.isAdmin);
+          setisManager(data.isManager);
+          setisEditPermission(data.isEditPermission);
           setIsLoading(false);
         }
       } catch (error) {
@@ -121,7 +127,7 @@ function Lead() {
   }
   return (
     <div>
-      <Header active="Lead" isAdmin={true} isManager={true} />
+      <Header active="Lead" isAdmin={isAdmin} isManager={isManager} isEditPermission={isEditPermission}  />
       <div className="container">
         <br />
         <button
@@ -129,6 +135,7 @@ function Lead() {
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#createLead"
+          disabled={!isEditPermission}
         >
           Create Lead
         </button>
@@ -208,6 +215,7 @@ function Lead() {
                             type="button"
                             className="btn btn-transparent text-secondary dropdown-toggle"
                             data-bs-toggle="dropdown"
+                            disabled={!isEditPermission}
                           >
                             {data.status}
                           </button>
@@ -341,6 +349,7 @@ function Lead() {
                         data-bs-toggle="offcanvas"
                         data-bs-target="#editLead"
                         onClick={() => SetEditLead(data._id)}
+                        disabled={!isEditPermission}
                       >
                         Edit
                       </button>

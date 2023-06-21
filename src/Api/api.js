@@ -18,6 +18,7 @@ export const LoginAPI = async (loginData) => {
 export const DashboardAPI = async () => {
   try {
     const response = await axios.post(url + "home", loginDataFromCookie);
+    console.log(response.data)
     return response.data;
   } catch (error) {
     console.error(error);
@@ -177,6 +178,16 @@ export const AddUserAPI = async (userDetails) => {
   };
   try {
     const response = await axios.post(url + "signup/verify", PayLoad);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return "login";
+  }
+};
+
+export const CheckUserCredentialsAPI = async () => {
+  try {
+    const response = await axios.post(url + "adduser", loginDataFromCookie);
     return response.data;
   } catch (error) {
     console.error(error);

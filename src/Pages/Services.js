@@ -11,6 +11,9 @@ import { useNavigate } from "react-router-dom";
 function Services() {
   const navigate = useNavigate();
   const [itemList, setItemList] = useState([]);
+  const [isAdmin, setisAdmin] = useState([]);
+  const [isManager, setisManager] = useState([]);
+  const [isEditPermission, setisEditPermission] = useState([]);
   const [create, setcreate] = useState({
     company: "",
     name: "",
@@ -37,7 +40,10 @@ function Services() {
           alert("Session Expired");
           navigate("/");
         } else {
-          setItemList(data);
+          setItemList(data.services);
+          setisAdmin(data.isAdmin);
+          setisManager(data.isManager);
+          setisEditPermission(data.isEditPermission);
           setIsLoading(false);
         }
       } catch (error) {
@@ -131,7 +137,7 @@ function Services() {
   }
   return (
     <div>
-      <Header active="Services" isAdmin={true} isManager={true} />
+      <Header active="Services" isAdmin={isAdmin} isManager={isManager} isEditPermission={isEditPermission} />
       <div className="container">
         <br />
         <button
@@ -139,6 +145,7 @@ function Services() {
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#createService"
+          disabled={!isEditPermission}
         >
           Create Service
         </button>
@@ -234,6 +241,7 @@ function Services() {
                             type="button"
                             className="btn btn-transparent text-secondary dropdown-toggle"
                             data-bs-toggle="dropdown"
+                            disabled={!isEditPermission}
                           >
                             {data.status}
                           </button>
@@ -393,6 +401,7 @@ function Services() {
                         data-bs-toggle="offcanvas"
                         data-bs-target="#editService"
                         onClick={() => SetEditServices(data._id)}
+                        disabled={!isEditPermission}
                       >
                         Edit
                       </button>

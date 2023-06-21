@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Components/Header";
 import "./CSS/AddUser.css";
-import { AddUserAPI } from "../Api/api";
+import { AddUserAPI, CheckUserCredentialsAPI } from "../Api/api";
 import { useNavigate } from "react-router-dom";
 
 function AddUser() {
   const navigate = useNavigate();
   const [itemList, setItemList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAdmin, setisAdmin] = useState([]);
+  const [isManager, setisManager] = useState([]);
+  const [isEditPermission, setisEditPermission] = useState([]);
   const [userDetails, setuserDetails] = useState({
     name: "",
     email: "",
@@ -16,18 +19,29 @@ function AddUser() {
   });
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(false);
+      try {
+        const data = await CheckUserCredentialsAPI();
+        if (data === "login") {
+          alert("Session Expired");
+          navigate("/");
+        } else {
+          setIsLoading(false);
+          setisAdmin(data.isAdmin);
+          setisManager(data.isManager);
+          setisEditPermission(data.isEditPermission);
+        }
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchData();
   }, []);
-  const isAdmin = false;
   const handleDataChange = (event) => {
     const value =
       event.target.type === "checkbox"
         ? event.target.checked
         : event.target.value;
     const name = event.target.name;
-    console.log(name, value);
     if (name === "isEdit") {
       setuserDetails((prevState) => ({
         ...prevState,
@@ -75,6 +89,7 @@ function AddUser() {
             name="email"
             value={userDetails.email}
             onChange={handleDataChange}
+            required
           />
           <br />
           <input
@@ -84,6 +99,7 @@ function AddUser() {
             name="name"
             value={userDetails.name}
             onChange={handleDataChange}
+            required
           />
           <br />
           <div className="row mt-3">
@@ -92,13 +108,14 @@ function AddUser() {
                 name="role"
                 value={userDetails.role}
                 onChange={handleDataChange}
+                required
               >
                 <option value="">Select Role</option>
                 <option value="admin" disabled={!isAdmin}>
                   Admin
                 </option>
-                <option value="manager">Manager</option>
-                <option value="employee">Employee</option>
+                <option value="manager" disabled={!isAdmin}>Manager</option>
+                <option value="employee" disabled={!isManager}>Employee</option>
               </select>
             </div>
             <div className="col-6">

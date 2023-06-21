@@ -35,7 +35,7 @@ function Home() {
   }
   return (
     <div>
-      <Header active="Dashboard" isAdmin={true} isManager={true} />
+      <Header active="Dashboard" isAdmin={itemList.isAdmin} isManager={itemList.isManager}  isEditPermission={itemList.isEditPermission}/>
       <Dashboard
         TotalUser={itemList.totalUserCount}
         TotalLeads={itemList.totalLeadCount}
