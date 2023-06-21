@@ -57,9 +57,12 @@ function AddUser() {
   async function HadleSubmit(event) {
     try {
       const data = await AddUserAPI(userDetails);
+      console.log(data)
       if (data === "login") {
         alert("Session Expired");
         navigate("/");
+      } else if (data === "Already registered") {
+        alert(data);
       } else {
         setItemList(data);
         console.log(itemList);
@@ -114,8 +117,12 @@ function AddUser() {
                 <option value="admin" disabled={!isAdmin}>
                   Admin
                 </option>
-                <option value="manager" disabled={!isAdmin}>Manager</option>
-                <option value="employee" disabled={!isManager}>Employee</option>
+                <option value="manager" disabled={!isAdmin}>
+                  Manager
+                </option>
+                <option value="employee" disabled={!isManager}>
+                  Employee
+                </option>
               </select>
             </div>
             <div className="col-6">
