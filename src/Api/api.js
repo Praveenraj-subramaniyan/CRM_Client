@@ -169,3 +169,17 @@ export const NewPasswordApi = async (otp, newPassword, confirmPassword) => {
     return "resetPassword";
   }
 };
+
+export const AddUserAPI = async (userDetails) => {
+  const PayLoad = {
+    userDetails,
+    loginDataFromCookie,
+  };
+  try {
+    const response = await axios.post(url + "signup/verify", PayLoad);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return "login";
+  }
+};

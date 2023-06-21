@@ -1,0 +1,12 @@
+.AddUserform{
+    border: 1px solid whitesmoke;
+    border-radius: 8px;
+    margin-left: 20% !important;
+    width: 35% !important;
+    margin-top:4% ;
+    padding: 2%;
+    padding-bottom: 5%;
+}
+.AddUserforminput{
+    width: 85%;
+}

@@ -43,7 +43,7 @@ function Header(data) {
               <Link
                 to={`/adduser`}
                 className={`${
-                  data.active === "Adduser" ? "active" : ""
+                  data.active === "AddUser" ? "active" : ""
                 } nav-link ${data.isAdmin || data.isManager ? "" : "disabled"}`}
               >
                 Add User
