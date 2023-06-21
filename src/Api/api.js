@@ -2,7 +2,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 const cookieValue = Cookies.get("crm_login");
 const loginDataFromCookie = cookieValue ? JSON.parse(cookieValue) : null;
-const url = "http://localhost:3000/";
+const url = "https://crm-server-ybpa.onrender.com/";
+//const url = "http://localhost:3000/";
 
 export const LoginAPI = async (loginData) => {
   try {
