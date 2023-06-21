@@ -4,6 +4,12 @@ import "./CSS/Header.css";
 
 function Header(data) {
   const navigate = useNavigate();
+  function Logout(){
+    const confirmed = window.confirm("Are you sure you want to log out?");
+    if (confirmed) {
+      navigate("/");
+    }
+  }
   return (
     <div>
       <nav className="navbar navbar-expand-sm bg-primary navbar-dark">
@@ -50,6 +56,7 @@ function Header(data) {
               </Link>
             </li>
           </ul>
+          <a className={` d-flex text-light me-5 text-decoration-none`} href="#" onClick={()=>Logout()}>Logout</a>
         </div>
       </nav>
     </div>

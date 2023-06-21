@@ -19,7 +19,6 @@ export const LoginAPI = async (loginData) => {
 export const DashboardAPI = async () => {
   try {
     const response = await axios.post(url + "home", loginDataFromCookie);
-    console.log(response.data)
     return response.data;
   } catch (error) {
     console.error(error);

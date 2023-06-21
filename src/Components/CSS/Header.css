@@ -22,4 +22,6 @@
   .dashBoardComp {
     border: 1px solid whitesmoke;
   }
-  
+  .LogoutHeader{
+    float: right;
+  }
