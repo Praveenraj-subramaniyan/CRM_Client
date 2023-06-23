@@ -8,8 +8,8 @@ function Login() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
-    emailid: "",
-    password: "",
+    emailid: "spr887011@gmail.com",
+    password: "1234",
   });
   const [isVisible, setIsVisible] = useState({
     status: "visually-hidden",
