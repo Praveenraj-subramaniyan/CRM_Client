@@ -1,7 +1,5 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-const cookieValue = Cookies.get("crm_login");
-const loginDataFromCookie = cookieValue ? JSON.parse(cookieValue) : null;
 const url = "https://crm-server-8og5.onrender.com/";
 //const url = "http://localhost:3000/";
 
@@ -17,10 +15,10 @@ export const LoginAPI = async (loginData) => {
 };
 
 export const DashboardAPI = async () => {
-  const cookieValueHome = Cookies.get("crm_login");
-const loginDataFromCookieHome  = cookieValue ? JSON.parse(cookieValue) : null;
+  const cookieValue = Cookies.get("crm_login");
+  const loginDataFromCookie = cookieValue ? JSON.parse(cookieValue) : null;
   try {
-    const response = await axios.post(url + "home", loginDataFromCookieHome);
+    const response = await axios.post(url + "home", loginDataFromCookie);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -29,6 +27,8 @@ const loginDataFromCookieHome  = cookieValue ? JSON.parse(cookieValue) : null;
 };
 
 export const LeadAPI = async () => {
+  const cookieValue = Cookies.get("crm_login");
+  const loginDataFromCookie = cookieValue ? JSON.parse(cookieValue) : null;
   try {
     const response = await axios.post(url + "leads", loginDataFromCookie);
     return response.data;
@@ -39,6 +39,8 @@ export const LeadAPI = async () => {
 };
 
 export const CreateLeadAPI = async (create) => {
+  const cookieValue = Cookies.get("crm_login");
+  const loginDataFromCookie = cookieValue ? JSON.parse(cookieValue) : null;
   try {
     const payLoad = {
       loginDataFromCookie,
@@ -53,6 +55,8 @@ export const CreateLeadAPI = async (create) => {
 };
 
 export const EditLeadAPI = async (edit) => {
+  const cookieValue = Cookies.get("crm_login");
+  const loginDataFromCookie = cookieValue ? JSON.parse(cookieValue) : null;
   const payLoad = {
     loginDataFromCookie,
     edit,
@@ -67,6 +71,8 @@ export const EditLeadAPI = async (edit) => {
 };
 
 export const StatusLeadAPI = async (id, status) => {
+  const cookieValue = Cookies.get("crm_login");
+  const loginDataFromCookie = cookieValue ? JSON.parse(cookieValue) : null;
   const payLoad = {
     loginDataFromCookie,
     id,
@@ -82,6 +88,8 @@ export const StatusLeadAPI = async (id, status) => {
 };
 
 export const ServicesAPI = async () => {
+  const cookieValue = Cookies.get("crm_login");
+  const loginDataFromCookie = cookieValue ? JSON.parse(cookieValue) : null;
   try {
     const response = await axios.post(url + "Services", loginDataFromCookie);
     return response.data;
@@ -92,6 +100,8 @@ export const ServicesAPI = async () => {
 };
 
 export const CreateServicesAPI = async (create) => {
+  const cookieValue = Cookies.get("crm_login");
+  const loginDataFromCookie = cookieValue ? JSON.parse(cookieValue) : null;
   try {
     const payLoad = {
       loginDataFromCookie,
@@ -106,6 +116,8 @@ export const CreateServicesAPI = async (create) => {
 };
 
 export const EditServicesAPI = async (edit) => {
+  const cookieValue = Cookies.get("crm_login");
+  const loginDataFromCookie = cookieValue ? JSON.parse(cookieValue) : null;
   const payLoad = {
     loginDataFromCookie,
     edit,
@@ -120,6 +132,8 @@ export const EditServicesAPI = async (edit) => {
 };
 
 export const StatusServicesAPI = async (id, status) => {
+  const cookieValue = Cookies.get("crm_login");
+  const loginDataFromCookie = cookieValue ? JSON.parse(cookieValue) : null;
   const payLoad = {
     loginDataFromCookie,
     id,
@@ -142,7 +156,7 @@ export const ForgetPasswordApi = async (email) => {
     secure: true,
   });
   try {
-    const response = await axios.post(url + "password/forget", {email});
+    const response = await axios.post(url + "password/forget", { email });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -174,6 +188,8 @@ export const NewPasswordApi = async (otp, newPassword, confirmPassword) => {
 };
 
 export const AddUserAPI = async (userDetails) => {
+  const cookieValue = Cookies.get("crm_login");
+  const loginDataFromCookie = cookieValue ? JSON.parse(cookieValue) : null;
   const PayLoad = {
     userDetails,
     loginDataFromCookie,
@@ -188,6 +204,8 @@ export const AddUserAPI = async (userDetails) => {
 };
 
 export const CheckUserCredentialsAPI = async () => {
+  const cookieValue = Cookies.get("crm_login");
+  const loginDataFromCookie = cookieValue ? JSON.parse(cookieValue) : null;
   try {
     const response = await axios.post(url + "adduser", loginDataFromCookie);
     return response.data;
