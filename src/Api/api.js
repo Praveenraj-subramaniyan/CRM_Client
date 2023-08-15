@@ -17,8 +17,10 @@ export const LoginAPI = async (loginData) => {
 };
 
 export const DashboardAPI = async () => {
+  const cookieValueHome = Cookies.get("crm_login");
+const loginDataFromCookieHome  = cookieValue ? JSON.parse(cookieValue) : null;
   try {
-    const response = await axios.post(url + "home", loginDataFromCookie);
+    const response = await axios.post(url + "home", loginDataFromCookieHome);
     return response.data;
   } catch (error) {
     console.error(error);
