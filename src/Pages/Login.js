@@ -49,9 +49,9 @@ function Login() {
     }));
   }
   return (
-    <div className=" mx-3 mt-5">
-      <h2 className="text-primary">CRM Management System</h2>
-      <form id="loginForm" className="loginFormcls" onSubmit={handleSubmit}>
+    <div className="mt-5 pt-5 d-flex justify-content-center align-items-center">
+      <form id="loginForm" className="loginFormcls mt-5" onSubmit={handleSubmit}>
+      <h3 className="text-primary mb-3">CRM Management System</h3>
         <input
           type="email"
           name="emailid"
